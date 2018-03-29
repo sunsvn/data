@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>微信语音识别</title>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=640, user-scalable=no, target-densitydpi=device-dpi' />
+<script src='jquery-1.10.1.min.js'></script>
+</head>
+<body>
+<div style="width:200px;margin:100px auto;">
+	<input type="button" class="luyin_start" value="开始录音" /></br></br></br>
+	<input type="button" class="luyin_end" value="停止录音" /></br></br></br>
+	<input type="button" class="luyin_play" value="播放录音" /></br></br></br>
+	<input type="button" class="luyin_translate" value="识别录音" />
+</div>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+var localId;
+// 微信语音识别
+$.ajax({
+	type: 'GET',
+	url: "/{$app_name}/extend/weixin/wx_jssdk/wx_sdk_config_js.php?url=" + encodeURIComponent(location.href),
+	async: false,
+	dataType: 'script',
+});
+
+$(function(){
+	$(".luyin_start").click(function(){
+		wx.startRecord();
+	});
+	
+	$('.luyin_end').click(function(){
+		wx.stopRecord({
+			success: function (res) {
+				localId = res.localId;
+				// alert(localId);
+			}
+		});
+	});
+	
+	$('.luyin_play').click(function(){
+		wx.playVoice({
+			localId: localId // 需要播放的音频的本地ID，由stopRecord接口获得
+		});
+	});
+	
+	$('.luyin_translate').click(function(){
+		wx.translateVoice({
+		   localId: localId, // 需要识别的音频的本地Id，由录音相关接口获得
+			isShowProgressTips: 1, // 默认为1，显示进度提示
+			success: function (res) {
+				alert(res.translateResult); // 语音识别的结果
+			}
+		});
+	});
+})
+
+</script>
+
+</body>
+</html>

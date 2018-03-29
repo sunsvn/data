@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8' />
+		<meta name='viewport' content='width=750, user-scalable=no, target-densitydpi=device-dpi' />
+        <meta name="format-detection" content="telephone=no">
+        <title>我的资料</title>
+        <link href="css/cropper.min.css" rel="stylesheet">
+        <style>
+            .previewbox{
+                overflow: hidden;
+                width:100px;
+                height:100px;
+                background-color: #ccc;
+            }
+        </style>
+    </head>
+    <body style='background-color:#f5f5f5;'>
+        <div class="container">
+            <img src="wbanner.jpg">
+        </div>
+        <div class='previewbox'></div>
+        <button id='getImg'>获取</button>
+    </body>
+	<script src="js/jquery.min.js"></script>
+    <script src="js/cropper.min.js"></script>
+    <script>
+
+        $('.container > img').cropper({
+            aspectRatio: 16 / 16,
+            crop: function(data) {
+                console.log( data )
+            },
+            preview:$('.previewbox'),
+            responsive: true,
+            autoCropArea:0.8,
+            built: function () {
+                
+            },
+            
+        });   
+        $('#getImg').click(function(){
+           confirm();
+        })
+        //$('.container > img').cropper("getCroppedCanvas")
+
+        function confirm() {
+            //$("#showEdit").fadeOut();
+            var $image = $('.container > img');
+            var dataURL = $image.cropper("getCroppedCanvas");//找死了
+            console.log( dataURL );
+            var imgurl = dataURL.toDataURL("image/png"); 
+            //var imgurl=dataURL.toDataURL("image/png",1.0);//这里转成base64 image，img的src可直接使用
+            console.log( imgurl );
+            //$(".container > img").attr("src", imgurl);
+        }
+
+    </script>
+</html>
+
+    

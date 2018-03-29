@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Document</title>
+	<script src="jquery-1.10.1.min.js"></script>
+	<script src="hammer.min.js"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#test {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 200px;
+			height: 200px;
+			background: #eee;
+		}
+	</style>
+</head>
+<body>
+  <div id="test"></div>
+
+  <script>
+	(function() {
+    var lastTime = 0;
+	    var vendors = ['webkit', 'moz'];
+	    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+	        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+	        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // name has changed in Webkit
+	                                      window[vendors[x] + 'CancelRequestAnimationFrame'];
+	    }
+	
+	    if (!window.requestAnimationFrame) {
+	        window.requestAnimationFrame = function(callback, element) {
+	            var currTime = new Date().getTime();
+	            var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+	            var id = window.setTimeout(function() {
+	                callback(currTime + timeToCall);
+	            }, timeToCall);
+	            lastTime = currTime + timeToCall;
+	            return id;
+	        };
+	    }
+	    if (!window.cancelAnimationFrame) {
+	        window.cancelAnimationFrame = function(id) {
+	            clearTimeout(id);
+	        };
+	    }
+	}());
+	
+	var ticking = false;
+	function requestElementUpdate() {
+        if(!ticking) {
+            requestAnimationFrame(updateElementTransform);
+            //ticking = true;
+        }
+    }
+	var transform = {
+		translate: { x: 0, y: 0 },
+		scale: 1,
+		angle: 0,
+		rx: 0,
+		ry: 0,
+		rz: 0
+	};
+	function updateElementTransform() {
+        var value = [
+			'translate3d(' + transform.translate.x + 'px, ' + transform.translate.y + 'px, 0)',
+			'scale(' + transform.scale + ', ' + transform.scale + ')',
+			'rotate3d('+ transform.rx +','+ transform.ry +','+ transform.rz +','+  transform.angle + 'deg)'
+        ];
+
+        value = value.join(" ");
+        el.style.webkitTransform = value;
+        el.style.transform = value;
+        ticking = false;
+    }
+	
+	var el = document.getElementById('test');
+	var mc = new Hammer.Manager(el);
+	mc.add(new Hammer.Pan({ threshold: 0, pointers: 0 }));
+    mc.add(new Hammer.Rotate({ threshold: 0 })).recognizeWith(mc.get('pan'));
+    mc.add(new Hammer.Pinch({ threshold: 0 })).recognizeWith([mc.get('pan'), mc.get('rotate')]);
+
+	var offsetX = 0, offsetY = 0;
+	mc.on('panstart panmove',onPan);
+	function onPan(e) {
+		if(e.type === 'panstart') {
+			offsetX = transform.translate.x;
+			offsetY = transform.translate.y;			
+		}
+		transform.translate.x = offsetX + e.deltaX;
+		transform.translate.y = offsetY + e.deltaY;
+		requestElementUpdate();
+	};
+	
+	var initScale = 1;
+	mc.on("pinchstart pinchmove", onPinch);
+    function onPinch(e) {
+        if(e.type === 'pinchstart') {
+            initScale = transform.scale || 1;
+        }
+        transform.scale = initScale * e.scale;
+		requestElementUpdate();
+    }
+
+	mc.on("rotatestart rotatemove", onRotate);
+	var initAngle = 0;
+    function onRotate(e) {
+        if(e.type === 'rotatestart') {
+            initAngle = transform.angle || 0;
+        }
+        transform.rz = 1;
+        transform.angle = initAngle + e.rotation;
+		requestElementUpdate()
+    }
+  </script>	
+</body>
+</html>

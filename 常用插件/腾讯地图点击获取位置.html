@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$site_name}</title>
+<meta name="keywords" content="{$site_seo_keywords}" />
+<meta name="description" content="{$site_seo_description}">
+<meta name="author" content="ThinkCMF">
+<tc_include file="Public:head" />
+</head>
+<body class="body-white" id="top">
+	<tc_include file="Public:nav" />
+
+		<div class="container tc-main">
+                <div class="row">
+                    <div class="span3">
+	                    <tc_include file="Public:usernav"/>
+                    </div>
+                    <div class="span9">
+                           <div class="tabs">
+                               <ul class="nav nav-tabs">
+                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-exchange"></i> 选定坐标</a></li>
+                               </ul>
+
+
+							   <div class="tab-content">
+								   <div class="tab-pane active" id="one">
+									   <form class="form-horizontal js-ajax-form" action="{:U('profile/edit_post')}" method="post">
+										   <input type="hidden" name="post[store_id]" value="{$store_id}">
+										   <input type="hidden" name="post[editmap]" value="editmap">
+
+										   <div class="control-group">
+											   <label class="control-label" for="seller_address">详细地址</label>
+											   <div class="controls">
+												   <input  type="text" id="seller_address"  name="post[address]" value="{$address}">
+												   <span>(如果地图为空白，请修改地址重新检索)</span> </div>
+
+										   </div>
+
+										   <div class="control-group">
+											   <label class="control-label" >坐标</label>
+											   <div class="controls">
+												   <input type="text" name="post[longitude]" id="inputLng" value="{$longitude}" readOnly="true" >
+												   <input type="text" name="post[latitude]" id="inputLat" value="{$latitude}" readOnly="true" >
+												   <span>(点击地图选择坐标)</span>
+											   </div>
+										   </div>
+
+
+
+										   <div class="control-group">
+											   <label class="control-label">选择坐标</label>
+											   <div class="controls">
+												   <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=uEoIKzF0KcGBjllzDa1BKWkHxDMoCgPu"></script>-->
+												   <!--<div id="allmap" style="width:600px; height: 300px;"></div>-->
+												   <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=QDBBZ-TDX65-VR2IP-QCFHU-AXYXS-IYB6L"></script>
+												   <div id="container" style="width:600px; height: 300px;"></div>
+											   </div>
+										   </div>
+
+										   <div class="control-group" >
+											   <textarea name="post[store_des]" id="" class="span9" style="display: none;height: 300px;resize: none">{$store_des}</textarea>
+										   </div>
+
+
+										   <div class="control-group">
+											   <div class="controls">
+												   <button type="submit" class="btn js-ajax-submit">保存</button>
+											   </div>
+										   </div>
+									   </form>
+								   </div>
+							   </div>
+
+
+						   </div>
+                    </div>
+                </div>
+
+		<tc_include file="Public:footer" />
+
+	</div>
+	<!-- /container -->
+	<tc_include file="Public:scripts" />
+
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.cityselect.js"></script>
+
+
+	<script type="text/javascript">
+		var inputLng = $('#inputLng').val();
+		var inputLat = $('#inputLat').val();
+		var point = new BMap.Point(inputLng,inputLat);
+		var marker = new BMap.Marker(point);
+
+		$(function() {
+//			$("#city_1").citySelect({
+//				prov:"{$seller.seller_area_id1}",
+//				city:"{$seller.seller_area_id2}",
+//				dist:"{$seller.seller_area_id3}"
+//			});
+			// 百度地图API功能
+			var allmap = document.getElementById('allmap');
+			var map = new BMap.Map("allmap");    // 创建Map实例
+			var ads = "{$address}";
+			map.centerAndZoom(ads,19);      // 初始化地图,用城市名设置地图中心点
+			/* 根据所选区域初始化地图 */
+//			$('.prov,.city,.dist,#seller_address').on("blur keyup change",function(){
+			$('#seller_address').on("blur keyup change",function(){
+//				var prov = $('.prov option:selected').html();
+//				var city = $('.city option:selected').html();
+//				var dist = $('.dist option:selected').html();
+				var address = $('#seller_address').val();
+				// 组合地址
+				//var ads = prov + city + dist +address;
+				var ads = address;
+				map.centerAndZoom(ads,19);      // 初始化地图,用城市名设置地图中心点
+			});
+
+			map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+			map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+			map.centerAndZoom(point,19);
+			/*map.addOverlay(marker);*/
+			map.addEventListener("click", function (e) {
+				/*map.removeOverlay(marker);*/
+				$('#inputLng').val(e.point.lng);
+				$('#inputLat').val(e.point.lat);
+			});
+
+		});
+	</script>
+	<script>
+		var inputLng = $('#inputLng').val();
+		var inputLat = $('#inputLat').val();
+		window.onload = function(){
+//直接加载地图
+			//初始化地图函数  自定义函数名init
+			function init() {
+				var center = new qq.maps.LatLng(inputLat,inputLng);
+				map = new qq.maps.Map(document.getElementById('container'),{
+					center: center,
+					zoom: 16
+				});
+
+
+				//调用地址解析类
+				geocoder = new qq.maps.Geocoder({
+					complete : function(result){
+						map.setCenter(result.detail.location);
+						var marker = new qq.maps.Marker({
+							map:map,
+							position: result.detail.location
+						});
+					}
+				});
+
+
+
+
+				var anchor = new qq.maps.Point(10, 30);
+				var size = new qq.maps.Size(32, 30);
+				var origin = new qq.maps.Point(0, 0);
+				var icon = new qq.maps.MarkerImage('__PUBLIC__/images/d.png', size, origin, anchor);
+				size = new qq.maps.Size(52, 30);
+				var originShadow = new qq.maps.Point(32, 0);
+				var shadow =new qq.maps.MarkerImage(
+						'img/plane.png',
+						size,
+						originShadow,
+						anchor
+				);
+
+				var marker = new qq.maps.Marker({
+					icon: icon,
+					shadow: shadow,
+					map: map,
+					position:center,
+					animation: qq.maps.MarkerAnimation.BOUNCE
+				});
+
+				var jump = function(event) {
+					marker.setPosition(event.latLng);
+				};
+
+				qq.maps.event.addListener(map, 'click', jump);
+
+
+
+
+
+
+				qq.maps.event.addListener(map, 'click', function(event) {
+					var latLng = event.latLng,
+							lat = latLng.getLat().toFixed(5),
+							lng = latLng.getLng().toFixed(5);
+					$('#inputLng').val(lng);
+					$('#inputLat').val(lat);
+				});
+
+			}
+
+			$('.prov,.city,.dist,#seller_address').on("blur keyup change",function(){
+				//$('#seller_address').on("blur keyup change",function(){
+				var prov = $('.prov option:selected').html();
+				var city = $('.city option:selected').html();
+				var dist = $('.dist option:selected').html();
+				var address = $('#seller_address').val();
+				// 组合地址
+				var ads = prov + city + dist +address;
+				//通过getLocation();方法获取位置信息值
+				geocoder.getLocation(ads);
+
+
+			});
+
+
+			//调用初始化函数地图
+			init();
+		}
+	</script>
+</body>
+</html>

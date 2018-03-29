@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html style='background-color:#f5f5f5'>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=750, user-scalable=no, target-densitydpi=device-dpi' />
+<title>红包</title>
+<link rel='stylesheet' href='css/app.css' />
+<script src='js/jquery-1.10.1.min.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="./wxshare.js"></script>
+</head>
+
+<body style='max-width:750px; background-color:#f5f5f5;'>
+
+<!-- 我的Begin -->
+<div class='honbaoTop' style='height:auto;'>
+	<div class="honbaoTopWrap"></div>
+	<div class='honbaoTopBox' style='height:auto;'>
+		<div class="headportrait" id='headportrait' style='background-image:url()'></div>
+		<p class='peoName' id='peoName'>魔女宅急便琪琪</p>
+		<!-- 有红包金额 yes -->
+		<div style='display:none;'>
+			<div class='ljhonbaoP'></div>
+			<p class='ljhonbaoData'><span>208.00</span>元</p>
+		</div>
+		<!-- 没有红包金额 no -->
+		<div>
+			<p class='ljhonbaoP2'>您还没有抢到红包，请再接再厉</p>
+			<p style='text-align:center;margin:18px 0'><img src='images/honbaoNone.jpg'></p>
+		</div>
+		<p class='lqTies'>金额将存到零钱，可直接提现</p>
+	</div>
+</div>
+<div class='honbaoBtn'>
+	<div class='holderT'></div>
+	<div class='holderB'></div>
+	<div class="holderAll"></div>
+	<div class="btnhonbao" id='btnhonbaoGoOn'><p>继续抢答</p></div>
+</div>
+<div class="tablistbox">
+	<p class='honbaoStatus'>红包奖励，已领取<font>3</font>/18个<a>我要发红包></a></p>
+		
+	</div>
+	<div class='tabConBox' id='tabConBox'>
+		
+		<div class="tabConBoxIn"  >
+			<ul class='joinListUl' style='margin:0 auto; width:700px;'>
+				<li>
+					<div class='floatDiv'>
+						<div class='touxiang' style='background-image:url(images/sendBtn.png); margin-top:3px;'></div>
+					</div>
+					<div class='floatDiv'>
+						<p class='reslistP1'>急便琪琪<span>0.50元</span></p>
+						<p class='reslistP2'>1月23号  15:20:30</p>
+					</div>
+					<div class='clear'></div>
+				</li>
+				<li>
+					<div class='floatDiv'>
+						<div class='touxiang' style='background-image:url(images/sendBtn.png); margin-top:3px;'></div>
+					</div>
+					<div class='floatDiv'>
+						<p class='reslistP1'>急便琪琪<span>0.50元</span></p>
+						<p class='reslistP2'>1月23号  15:20:30</p>
+					</div>
+					<div class='clear'></div>
+				</li>
+			</ul>
+			<div class='loadMore2'>上拉加载更多</div>
+		</div>
+	</div>
+</div>
+
+<!-- 答更多题目弹层 -->
+<div class='resBox' id='resBoxMore' style='display:none;'>
+	<div class='resBoxIn'>
+		<div class='resBoxInDesc' style='background:#ed412d url(images/bghon.png) no-repeat center top; width:630px; background-size:100% auto;'>
+			<div class='headportrait' style='background-image:url(); margin-top:85px;'></div>
+			<p class='ansUserName' style='margin-top:12px;'><span>急便琪琪</span></p>
+			<div class='getmoreTies'>
+				<p style='font-size:28px;'>还想继续答题？先给我塞个小红包包！</p>
+				<h4 style='color:#fa5236'>您还有<span>四</span>次抢红包机会</h4>
+			</div>
+			<p class='lotteryP'><span>0.5</span>元</p>
+			<div class='yesGetHonbaoBtn'>塞进红包</div>
+			<p class='lotteryP2'>塞进红包的钱会直接返还给急便琪琪哦！</p>
+			<div class='closeBtn' style='width:24px; height:24px;'></div>
+		</div>
+
+	</div>
+</div>
+<!-- 我的End -->
+<style>
+/* 背景音乐 */
+.audio-open, .audio-close { background-image: url("images/music.png"); }
+</style>
+
+<script>
+
+
+
+
+
+
+//微信分享
+$(function(){
+	//微信分享的内容
+	var shareData = {
+		title: '2047,我的生活密码', 
+	    desc: '一千个人有一千种幸福方式，但他们的幸福生活却源自同一组密码', 
+	    link: 'http://carmobile.tigowx.com/',
+	    imgUrl: 'http://carmobile.tigowx.com/wxshare.jpg',
+	};
+	//获得微信分享的处理链接
+	var wxShareHandleUrl = 'http://carmobile.tigowx.com/wxshare.php';
+	var currentUrl = encodeURIComponent(window.location.href);
+	wxshare(wxShareHandleUrl, currentUrl, shareData);
+
+
+	//继续抢答
+	$('#btnhonbaoGoOn').click(function(){
+		$('#resBoxMore').fadeIn();
+	})
+	//点击幕布关闭
+	$('.closeBtn').click(function(e){
+		e.preventDefault();
+		$('#resBoxMore').fadeOut();
+	})
+	//点击幕布关闭
+	$('.closeBtn').click(function(e){
+		e.preventDefault();
+		$('#resBoxMore').fadeOut();
+	})
+
+
+	/*--------------滚动加载-----------------*/
+    var flagMore = true; //是否加载更多
+    var indexPage = 1;
+    $(document).scroll(function(){
+        var win_h = $(window).height();     //window高度
+        var doc_h = $(document).height();   //文档高度
+        var scroll_H = $(window).scrollTop();
+        if( win_h + scroll_H >=  doc_h-1 && flagMore ==  true ){
+           alert('加载更多');
+        }
+    })
+
+})
+	
+
+
+</script>
+<script src='js/global.js'></script>
+<script src='js/app.js?v201607291209'></script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- 效果：http://hovertree.com/texiao/jquery/61/ -->
+<meta charset="UTF-8">
+<title>jQuery点击选择购买年月时长 - 何问起</title><base target="_blank" />
+<meta name="author" content="何问起" />
+
+<script type="text/javascript" src="http://down.hovertree.com/jquery/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+<script>
+	function orient() {
+		if (window.orientation == 90 || window.orientation == -90) {
+			alert("heng")
+			//ipad、iphone竖屏；Andriod横屏
+			return false;
+		}else if (window.orientation == 0 || window.orientation == 180) {
+			alert("shu")
+			//ipad、iphone横屏；Andriod竖屏
+			return false;
+		}
+	}
+	//页面加载时调用
+	$(function(){
+		orient();
+	});
+	//用户变化屏幕方向时调用
+	$(window).bind( 'orientationchange', function(e){
+		orient();
+	});
+
+</script>
+</body>
+</html>

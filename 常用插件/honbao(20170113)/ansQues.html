@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html style='background-color:#f5f5f5;'>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=750, user-scalable=no, target-densitydpi=device-dpi' />
+<title>红包</title>
+<link rel='stylesheet' href='css/app.css' />
+<script src='js/jquery-1.10.1.min.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="./wxshare.js"></script>
+</head>
+
+<body style='max-width:750px; background-color:#f5f5f5;'>
+
+<div class='ansBox' >
+	<div class='centerBox' style='background:none;'>
+		<div class='ansBoxIn' >
+			<div class='headportrait' style='background-image:url()'></div>
+			<p class='ansUserName'><span>急便琪琪</span><br>发了一个答题红包</p>
+			
+			<p class='ansQuesHolder1'> “听说这个世界上只有一个人可以答对全<br>部的题目一起吃s”</p>
+			<div class='ansQuesAn'></div>
+			<div class='ansQuesBtn'>
+				<p>打开红包</p>
+			</div>
+			<div class='ansQuesChkOther'><p><span>看看大家的手气></span></p></div>
+		</div>
+	</div>
+</div>
+<style>
+/* 背景音乐 */
+.audio-open, .audio-close { background-image: url("images/music.png"); }
+</style>
+
+<script>
+
+
+
+//微信分享
+(function($){
+	//微信分享的内容
+	var shareData = {
+		title: '2047,我的生活密码', 
+	    desc: '一千个人有一千种幸福方式，但他们的幸福生活却源自同一组密码', 
+	    link: 'http://carmobile.tigowx.com/',
+	    imgUrl: 'http://carmobile.tigowx.com/wxshare.jpg',
+	};
+	//获得微信分享的处理链接
+	var wxShareHandleUrl = 'http://carmobile.tigowx.com/wxshare.php';
+	var currentUrl = encodeURIComponent(window.location.href);
+	wxshare(wxShareHandleUrl, currentUrl, shareData);
+})(jQuery)
+
+
+</script>
+<script src='js/global.js'></script>
+<script src='js/app.js?v201607291209'></script>
+
+</body>
+</html>
+
+

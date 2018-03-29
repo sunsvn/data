@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name='viewport' content='initial-scale=1.0, user-scalable=no, target-densitydpi=device-dpi' />
+  <title>$animate</title>
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+  body{
+    background:#f0f0f0;
+  }
+  .wuyeSearBox{
+    background:#f0f0f0;
+    border-bottom: 1px solid #cfcfd2;
+    padding:0.5rem 0;
+  }
+  .wuyeSearBox input{
+    border:none;
+    border-radius: 0.35rem 0px 0px 0.35rem;
+    margin-left: 0.5rem;
+    width:80%;
+    height:1.6rem;
+  }
+  .wuyeSearBoxIn{
+    background-color: #fff;
+    width:90%;
+    border:2px solid #e62129;
+    margin:0 auto;
+    
+    border-radius: 0.35rem;
+    overflow: hidden;
+    font-size: 0.6rem;
+  }
+  .wuyeSearBox span{
+    display: inline-block;
+    width:1.9rem;
+    height:1.6rem;
+    background:#e62129 url(img/select.png) no-repeat center center;
+    background-size:100% auto;
+    float: right;
+  }
+  .wuyeRecommand{
+    background:#fff;
+  }
+  .wuyeRecommandTit{
+    font-size: 0.7rem;
+    color:#999999;
+    line-height: 2rem;
+    text-indent: 0.6rem;
+    background: #fff;
+  }
+  ul.wuyeRecommandUl{
+
+  }
+  ul.wuyeRecommandUl li{
+    width:33.333333333%;
+    float:left;
+    margin-bottom: 0.6rem;
+  }
+  ul.wuyeRecommandUl li div{
+    border:1px solid #cfcfd2;
+    width:75%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0.6rem;
+    padding:0.4rem 0;
+    color: #666666;
+  }
+  .wuyeTies{
+    color: #666666;
+    font-size: 0.6rem;
+    background-color: #f0f0f0;
+    line-height: 1.2rem;
+    text-indent: 0.6rem;
+  }
+  .wuyeList h4{
+    background-color: #f0f0f0;
+    font-size: 0.7rem;
+    color: #666666;
+    text-indent: 0.6rem;
+    line-height: 1.2rem;
+  }
+  .wuyeList p{
+    font-size: 0.7rem;
+    color: #333333;
+    text-indent: 0.6rem;
+    line-height: 1.5rem;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fff;
+  }
+  .wuyeList p:last-child{border-bottom: none;}
+  .wuyeListFixed{
+    position: fixed;
+    background:rgba(0,0,0,0.4);
+    width:1.2rem;
+    top:0;
+    right:0;
+    height:100vh;
+  }
+  .wuyeListFixedIn{
+    width:100%; 
+    height:100%;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
+    color: #666666;
+    font-size: 0.7rem;
+    line-height: 1rem;
+    overflow: scroll;
+  }
+  .searchAftBox{
+    background-color:#fff;
+  }
+  .searchNone p{
+    font-size: 0.6rem;
+    color: #333333;
+    text-align: center;
+    line-height: 1.2rem
+  }
+  </style>
+</head>
+  <!--物业-->
+<div class='wuyebox'>
+  <div class='wuyeSearBox'>
+    <div class='wuyeSearBoxIn'>
+      <input placeholder='输入物业名称或关键词查询' />
+      <span></span>
+    </div>
+  </div>
+  <div class='searchBefBox'>
+    <div class='wuyeRecommand'>
+      <p class='wuyeRecommandTit'>常选物业</p>
+      <ul class='wuyeRecommandUl'>
+        <li>
+          <div>
+            <p>万科</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>万科</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>万科</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>万科</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>万科</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>万科</p>
+          </div>
+        </li>
+        <div class='clear'></div>
+      </ul>
+    </div>
+    <p class='wuyeTies'>所有物业（按拼音顺序排序）</p>
+    <ul class='wuyeList'>
+      <li>
+        <h4>A</h4>
+        <p>北大资源</p>
+        <p>北大资源</p>
+        <p>北大资源</p>
+      </li>
+      <li>
+        <h4>B</h4>
+        <p>北大资源</p>
+        <p>北大资源</p>
+        <p>北大资源</p>
+      </li>
+    </ul>
+  </div>
+  <!--搜索结果-->
+  <div class='searchAftBox'>
+    <p style='font-size:0.5rem; color:#999999; text-indent:0.6rem; line-height:1.2rem;'>相关物业</p>
+    <ul class='wuyeList'>
+      <li>
+        <h4>A</h4>
+        <p>北大资源</p>
+        <p>北大资源</p>
+        <p>北大资源</p>
+      </li>
+      <li>
+        <h4>B</h4>
+        <p>北大资源</p>
+        <p>北大资源</p>
+        <p>北大资源</p>
+      </li>
+    </ul>
+  </div>
+  <div class='searchNone'>
+    <p><img style='width:6rem; margin-top:3.5rem; margin-bottom:2rem;' src='img/wuyeNone.png'></p>
+    <p>未搜索到“<span style=' color:#e62129;'>彩生活</span>”相关物业<br/>
+  请重新搜索或选择“<span style='color:#ff9600;'>其他物业</span>”</p>
+  </div>
+</div>
+<!--右侧栏列表-->
+<div class='wuyeListFixed'>
+  <div class='wuyeListFixedIn'>
+    <a href='#B'>A</a>
+  </div>
+</div>
+
+<script>
+  
+</script>
+</body>
+</html>

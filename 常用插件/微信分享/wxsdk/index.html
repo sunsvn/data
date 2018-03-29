@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>微信SDK</title>
+</head>
+<body>
+<button id="wxShare">微信分享</button>
+
+
+<script src="jquery.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+(function($){
+	var currentUrl = location.href;
+
+	$.ajax({
+		type: "GET",
+		url: "http://jeweywx.tigonetwork.com/wxsdk/jssdk.php?url=" + currentUrl,
+		dataType: 'jsonp',
+		jsonp: "callback",
+		jsonpCallback:"success_jsonpCallback",
+		success : function(data){
+			console.log(data);
+			wx.config({
+				debug: true,
+				appId: data.appId,
+				timestamp: data.timestamp,
+				nonceStr: data.nonceStr,
+				signature: data.signature,
+				jsApiList: [
+					"onMenuShareTimeline",
+					"onMenuShareAppMessage",
+					'onMenuShareQQ'
+				]
+			});
+		},
+		error:function(errorInfo){
+			console.log(errorInfo);
+		}
+	});
+
+	console.log(wx);
+
+
+	wx.ready(function(){
+
+		// wx.hideOptionMenu();
+
+		wx.onMenuShareTimeline({
+			title: '这是分享测试标题',
+			link: 'http://jeweywx.tigonetwork.com/',
+			imgUrl: 'http://topicking.com/wxsdk/dog.jpg',
+			success: function () {
+				alert('分享成功');
+			},
+			cancel: function () {
+				alert('分享失败');
+			}
+		});
+
+		wx.onMenuShareAppMessage({
+		    title: '分享标题', // 分享标题
+		    desc: '分享描述', // 分享描述
+		    link: 'http://jeweywx.tigonetwork.com/', // 分享链接
+		    imgUrl: 'http://www.sunhuodong.com/uploads/2015/10/d.jpg', // 分享图标
+		    type: 'link', // 分享类型,music、video或link，不填默认为link
+		    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		    success: function () { 
+		        // 用户确认分享后执行的回调函数
+		        alert('分享成功');
+		    },
+		    cancel: function () { 
+		        // 用户取消分享后执行的回调函数
+		        alert('分享失败');
+		    }
+		});
+
+		wx.onMenuShareQQ({
+		    title: '分享标题',  
+		    desc: '分享描述',  
+		    link: 'http://jeweywx.tigonetwork.com/',  
+		    imgUrl: 'http://www.sunhuodong.com/uploads/2015/10/d.jpg',  
+		    success: function () { 
+		       alert('分享成功');
+		    },
+		    cancel: function () { 
+		       alert('分享失败');
+		    }
+		});
+
+
+	});
+
+}) (jQuery)
+
+
+</script>
+</body>
+</html>

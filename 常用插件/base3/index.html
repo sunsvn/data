@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <script src="js/jquery.mytool.js"></script>
+	<script>
+		getViewport();	// 设置viewport
+	</script>
+    <title> XXX项目 </title>
+    <link rel="stylesheet" href="js/swiper/swiper.3.2.0.min.css">
+    <link rel="stylesheet" href="js/swiper/animate.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="js/jquery-1.10.1.min.js"></script>
+    <script src="js/preloadjs-0.4.1.min.js"></script>
+    <script src="js/swiper/swiper.3.2.0.jquery.min.js"></script>
+    <script src="js/swiper/swiper.animate1.0.2.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+    
+
+    <!-- 背景音乐 -->
+    <div class="audio-bg">
+        <p class="audio-btn">
+            <span class="audio-open"></span>
+            <span class="audio-close"></span>
+        </p>
+        <audio preload="preload" loop="loop" id="bgMusic">
+            <source type="audio/mpeg" src="media/music.mp3">
+            您的浏览器不支持HTML音频格式
+        </audio>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="wrap">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide bgStyle">
+                    <div class="animate-page">
+                        第一页
+                    </div>
+                </div>
+                <div class="swiper-slide bgStyle">
+                    <div class="animate-page">
+                        第二页
+                    </div>
+                </div>
+                <div class="swiper-slide bgStyle">
+                    <div class="animate-page">
+                        <div class='ani wo' style='width:100px; height:100px; background:red; margin:400px 200px;' swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="0s"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script>
+var swiper;
+var isSwiperInit = false;
+swiper =  new Swiper('.swiper-container', {
+	direction: 'vertical',
+	initialSlide :0,
+	//loop: true,
+	observer:true,
+	keyboardControl : true,
+	mousewheelControl : true,
+	onInit: function(swiper) {
+		isSwiperInit = true;
+		swiperAnimateCache(swiper);
+		swiperAnimate(swiper);
+	},
+	onSlideChangeStart: function(swiper) {
+		console.log('ttt');
+		swiperAnimate(swiper);
+	},
+	onSlideChangeEnd: function(swiper){
+		//if(isSwiperInit) {
+			swiperAnimate(swiper);
+		//}
+	},
+	onTouchEnd: function(swiper) {
+		swiperAnimate(swiper);
+	},
+});
+	$(function(){
+		swiper.slideTo(2,0,true);
+		//swiper.onSlideChangeStart(function(){
+		//	console.log('ddddd');
+		//});
+
+	})
+		initBgMusic();
+	</script>
+</body>
+</html>

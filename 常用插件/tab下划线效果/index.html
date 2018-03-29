@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ngBindTemplate例子</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #canvas{
+            background:green;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="620" width="1360" id="canvas" style="position: absolute; height: 100%;"/>
+    </canvas>
+    <script>
+        var can = document.getElementById('canvas');
+        var ctx = can.getContext('2d');
+        var mousePos = [0,0];
+        var nodes = [];
+        var edges = [];
+        window.onresize = function(){
+            can.width = document.body.clientWidth;
+            can.height = can.clientHeight;
+            if( nodes.length == 0 ){
+                constructNodes();
+            }
+            render();
+        }
+        window.onresize();
+        <!--===================-->
+        function constructNodes(){
+            for(var i = 0; i<100; i++){
+                var node = {
+                    drivenByMouse:i == 0,
+                    x:Math.random()*can.width,
+                    y:Math.random()*can.height,
+                    vx:Math.random()*1-0.5,
+                    vy:Math.random()*1-0.5,
+                    radius:Math.random() > 0.9?3 + Math.random() * 3:1+Math.random()*3
+                };
+                nodes.push(node);
+            }
+            nodes.forEach(function(e){
+                nodes.forEach(function(e2){
+                    if(e == e2){
+                        return;
+                    }
+                    var edge = {
+                        from:e,
+                        to:e2
+                    }
+                    addEdge(edge);
+
+                    if(e.x <= 0 || e.x >= can.width){
+                        e.vx *= -1;
+                        e.x = clamp(0,can.width,e.x)
+                    }
+                    if(e.y <= 0 || e.y >=can.height){
+                        e.vy *= -1;
+                        e.y = clamp(0,can.height,e.y)
+                    }
+                    adjustNodeDrivenByMouse();
+                    render();
+                    //window.requestAnimation(step){
+                        
+                    //}
+
+                })
+            })
+        }
+        <!---==================-->
+        function adjustNodeDrivenByMouse(){
+            nodes[0].x += (mousePos[0] - nodes[0].x )/easingFactor;
+            nodes[0].y += (mousePos[1] - nodes[0].y )/easingFactor;
+        }
+
+        //x = x + (t - x)/factor
+
+        <!--===================-->
+        function render(){
+            ctx.fillStyle = backgroundColor;
+            cxt.fillRect(0,0,can.width.can.height);
+            edges.forEach(function(e){
+                var l = lengthOfEdge(e);
+                var threshold = can.width/8;
+                if( l >threshold ){
+                    return;
+                }
+                ctx.strokeStyle = edgeColor;
+                ctx.lineWidth = (1 - l/threshold)*2.5;
+                ctx.globalAlpha = 1 - l/threshold;
+                ctx.beginPath();
+                ctx.moveTo(e.from.x,e.from.y);
+                ctx.lineTo(e.to.x,e.to.y);
+                ctx.stroke();
+
+            })
+            ctx.globalAlpha = 1.0;
+
+            nodes.forEach(function(e){
+                if(e.drivenByMouse){
+                    return;
+                }
+                ctx.fillStyle = nodeColor;
+                ctx.beignPath();
+                ctx.arc(e.x,e.y,e.radius,0,2*Math.PI);
+                cxt.fill();
+            })
+        }
+
+
+        <!---==================-->
+        function addEdge(edge){
+            var ignore = false;
+            edges.forEach(function(e){
+                if(e.from == edge.from & e.to == edge.to ){
+                    ignore = true;
+                }
+                if(e.from == edge.to & e.to == edge.from){
+                    ignore = true;
+                }
+                if(!ignore){
+                    edges.push(edge);
+                }
+            })
+        }
+
+        <!--====================-->
+        function step(){
+            nodes.forEach(function(e){
+                if(e.drivenByMouse){
+                    return;
+                }
+                e.x += e.vx;
+                e.y += e.vy;
+            })
+        }
+
+        <!--====================-->
+        function clamp(min,max,value){
+            if( value > max ){
+                return max;
+            }else if( value < min ){
+                return min;
+            }else{
+                return value;
+            }
+        }
+
+
+    </script>
+</body>
+</html>

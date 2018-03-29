@@ -1,0 +1,44 @@
+
+-----------------------js------------------
+
+// 提示
+$('body').append(function() {
+	return "<center class='tip_wrap'><span class='tip'></span></center>";
+});
+function message(msg) {
+	$('.tip').text(msg);
+	$('.tip_wrap').show();
+	setTimeout(function() {
+		$('.tip_wrap').hide();
+	}, 1000);
+}
+
+
+
+---------------css-------------------
+
+/**
+	 * 提示
+	 */
+.tip_wrap
+{
+    display:none;
+    width:100%;
+    position:fixed;
+    top:0;
+    z-index:9999;
+}
+.tip
+{
+    background:rgba(255,234,55,0.7);
+    width:100%;
+    display: block;
+    height:76px;
+    line-height: 76px;
+    color:#fb5236;
+    border-radius:8px;
+    font-size: 34px;
+}
+
+---------------------调用示例-------------------------
+message('用户名不能为空')

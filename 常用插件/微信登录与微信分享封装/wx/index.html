@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title></title>
+	<script src="jquery.min.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="wxshare.js"></script>
+</head>
+<body>
+<h2 style="text-align: center;">微信登录</h2>
+<p>服务器端：上传wxlogin.class.php和wxlogin.php文件，将wxlogin.php文件中的appid和appsecret改为自己的微信公众号appid和appsecret；</p>
+<p>前端页面放入以下代码：</p>
+<pre style="width:100%;overflow: overlay; background-color: #eee;padding:8px;">
+//微信登录
+//本页面网址，用于回调
+var currentUrl = location.href;
+//微信登录的逻辑处理页面
+var wxLoginHandleUrl = 'http://wxhouse.tigonetwork.com/wx/wxlogin.php';
+//微信登录响应按钮
+document.getElementById('wxLoginBtn').addEventListener('click', function(){
+	window.location.href = wxLoginHandleUrl + '?type=login&backUrl=' + currentUrl;
+});
+</pre>
+<p>成功获取到用户信息后，用户的信息被写入到cookie中，前台可以在cookie中拿到用户信息。</p>
+<p>注：微信获取用户信息需要在微信公众号后台的“授权获得用户信息”处填写与程序源码所在服务器域名。</p>
+<button id="wxLoginBtn" style="width:100%; height: 42px;">微信登录</button>
+
+<hr />
+
+<h2 style="text-align: center;">微信分享</h2>
+<p>服务器端：上传wxshare.class.php、wxshare.php文件，将wxshare.php文件中的appid和appsecret改为自己的微信公众号appid和appsecret；</p>
+<p>在前端页面（如本页）引入jquery、微信接口JS和wxshare.js（请参考本页head部分源码）</p>
+<p>前端页面放入以下代码：</p>
+<pre style="width:100%;overflow: overlay; background-color: #eee;padding:8px;">
+//微信分享
+(function($){
+	//微信分享的内容
+	var shareData = {
+		title: '分享标题', 
+	    desc: '分享描述', 
+	    link: 'http://www.tigonetwork.com/',
+	    imgUrl: 'http://wxhouse.tigonetwork.com/wx/wxshare.jpg',
+	};
+	//获得微信分享的处理链接
+	var wxShareHandleUrl = 'http://wxhouse.tigonetwork.com/wx/wxshare.php';
+	var currentUrl = location.href;
+	wxshare(wxShareHandleUrl, currentUrl, shareData);
+})(jQuery)
+</pre>
+<p>注：微信分享需要在微信公众平台后台中填写安全域名</p>
+
+
+
+
+
+<script>
+	//微信登录
+	//本页面网址，用于回调
+	var currentUrl = location.href;
+	//微信登录的逻辑处理页面
+	var wxLoginHandleUrl = 'http://wxhouse.tigonetwork.com/wx/wxlogin.php';
+	//微信登录响应按钮
+	document.getElementById('wxLoginBtn').addEventListener('click', function(){
+		window.location.href = wxLoginHandleUrl + '?type=login&backUrl=' + currentUrl;
+	});
+</script>
+
+<!--****************************************************************************** -->
+
+<script>
+//微信分享
+(function($){
+	//微信分享的内容
+	var shareData = {
+		title: '分享标题', 
+	    desc: '分享描述', 
+	    link: 'http://www.tigonetwork.com/',
+	    imgUrl: 'http://wxhouse.tigonetwork.com/wx/wxshare.jpg',
+	};
+	//获得微信分享的处理链接
+	var wxShareHandleUrl = 'http://wxhouse.tigonetwork.com/wx/wxshare.php';
+	var currentUrl = location.href;
+	wxshare(wxShareHandleUrl, currentUrl, shareData);
+})(jQuery)
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html><!--声明当前文档为html文档-->
+<html lang="en"><!--语言为英语-->
+	<head><!--头部-->
+		<meta charset="UTF-8"><!--字符编码：utf-8国际编码  gb2312中文编码-->
+		<meta name="Keywords" content="关键词">
+		<meta name="Description" content="描述">
+		<title>Document</title>
+		<style>/*css样式表的衣柜*/
+		*{margin:0px;padding:0px;}/*去除默认外边距、内边距*/
+		
+		.afterfix{
+			content: '';
+			width:100%;
+			height: 0;
+		}
+		.clear{
+			/*height:60px;*/
+			background:#000;
+			clear:both;
+		}
+		</style>
+	</head>
+	<body><!--身体-->
+		<div class='afterfix' style='width:100px; float:left; background:green; '>这里是DIV内容部分</div>
+		<div class='clear'></div>
+		<div style='width:200px; height:90px; float:right; background-color:yellow;'></div>
+	</body>
+</html>

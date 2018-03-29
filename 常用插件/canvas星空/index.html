@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>canvas</title>
+	
+</head>
+<body >	
+	<canvas id='canv' width='640' height='750' style='background:#ccc;'></canvas>
+</body>
+</html>
+<script type="text/javascript">
+    var canv = document.getElementById('canv');
+    ctx = canv.getContext('2d');
+    ctx.lineWidth = 3;
+    ctx.fillStyle = '#019fe8';     //蓝色
+    ctx.strokeStyle = '#111518';   //线条黑色
+    // var grd=can.createLinearGradient(0,0,500,550);
+    // grd.addColorStop(0,"#FF0000");
+    // grd.addColorStop(1,"#00FF00");
+    //can.fillStyle=grd;
+    ctx.beginPath();
+    // can.moveTo(100,100);
+    // can.lineTo(200,100);
+    // can.lineTo(300,300);
+    ctx.arc(365,228,220, 0,Math.PI*2,true)
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    //头部
+    //脸型
+    ctx.fillStyle = '#fff';
+
+    ctx.beginPath();
+    ctx.moveTo(180,260);           // 创建开始点
+    //ctx.lineTo(180,200)
+    ctx.arcTo(180,110,390,110,150); // 创建弧
+    ctx.arcTo(573,110,575,234,140); // 创建弧
+    ctx.arcTo(581,419,368,440,190); // 创建弧
+    ctx.arcTo(181,439,180,260,168); // 创建弧
+    //can.lineTo(412,105);         // 创建垂直线
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    //眼睛
+    ctx.beginPath();
+    ctx.moveTo(298,90);           // 创建开始点
+    ctx.arcTo(298,29,344,26,50); // 创建弧
+    ctx.arcTo(394,33,394,90,55); // 创建弧
+    ctx.arcTo(400,146,353,149,55); // 创建弧
+    ctx.arcTo(296,143,299,100,40); // 创建弧    
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    //眼睛
+    ctx.beginPath();
+    ctx.moveTo(398,90);           // 创建开始点
+    ctx.arcTo(398,29,444,26,50); // 创建弧
+    ctx.arcTo(494,33,494,90,55); // 创建弧
+    ctx.arcTo(500,146,453,149,55); // 创建弧
+    ctx.arcTo(396,143,399,100,40); // 创建弧    
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(298,90);           // 创建开始点
+    ctx.lineTo(375,40);
+    ctx.stroke();
+
+    //眼睛
+    ctx.beginPath();
+    ctx.fillStyle='#111518';
+    ctx.moveTo(367,108);           // 创建开始点
+    ctx.arcTo(367,89,378,89,10); // 创建弧
+    ctx.arcTo(385,89,385,108,10); // 创建弧
+    ctx.arcTo(385,127,378,127,14); // 创建弧
+    ctx.arcTo(367,127,367,108,8); // 创建弧    
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+
+    ctx.fillStyle='#fff';
+    ctx.moveTo(370,108);           // 创建开始点
+    ctx.arcTo(370,100,374,100,5); // 创建弧
+    ctx.arcTo(378,100,378,108,5); // 创建弧
+    ctx.arcTo(378,117,378,117,7); // 创建弧
+    ctx.arcTo(370,117,370,108,4); // 创建弧    
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.moveTo(413,40);           // 创建开始点
+    ctx.lineTo(490,60);
+    ctx.stroke();
+
+    
+    ctx.moveTo(413,97);           // 创建开始点
+    ctx.arcTo(413,120,430,120,15); // 创建弧
+    ctx.arcTo(440,120,440,97,15); // 创建弧
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.fillStyle='#e1002a';
+    ctx.arc(405,164,35,0,360);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.fillStyle='#fff';
+    ctx.strokeStyle = '#fff'; 
+    //ctx.arc(400,150,11,0,360);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = '#111518'; 
+    ctx.moveTo(405,197);
+    ctx.lineTo(405,290);
+    ctx.stroke();
+
+    ctx.moveTo(261,357);
+    ctx.lineTo(405,290);
+    ctx.lineTo(515,327);
+    ctx.stroke();
+
+    ctx.moveTo(230,165);
+    ctx.lineTo(355,200);
+    ctx.moveTo(210,220);
+    ctx.lineTo(355,220);
+    ctx.moveTo(210,280);
+    ctx.lineTo(355,250);
+    ctx.moveTo(450,200);
+    ctx.lineTo(540,175);
+    ctx.moveTo(450,220);
+    ctx.lineTo(560,215);
+    ctx.moveTo(450,245);
+    ctx.lineTo(560,255);
+    ctx.stroke();
+</script>
+
+

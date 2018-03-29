@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0043)http://www.jq22.com/demo/jquery-sq20151231/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>商品筛选特效</title>
+
+<link rel="stylesheet" href="./jq22.css">
+<script type="text/javascript" src="./jquery-1.4.3.min.js"></script>
+</head>
+<body>
+<div class="selectNumberScreen">
+	<div id="selectList" class="screenBox screenBackground">
+		<dl class="listIndex" attr="terminal_brand_s">
+		  <dt>品  牌：</dt>
+		  <dd><a href="javascript:void(0)" values2="" values1="" attrval="欧莱雅">欧莱雅</a> 
+		  <a href="javascript:void(0)" values2="" values1="" attrval="欧莱雅">欧莱雅</a>
+		  
+		  <a href="javascript:void(0)" values2="" values1="" attrval="诺基亚">诺基亚</a>
+		  <span class="more"><label>更多</label><em class="open"></em></span> </dd>
+		</dl>
+		<dl class="listIndex" attr="价格范围">
+		  <dt>价  格：</dt>
+		  <dd><a href="javascript:void(0)" values2="499" values1="1" attrval="1-499">1-499</a> 
+		  <a href="javascript:void(0)" values2="0" values1="5000" attrval="5000以上">5000以上</a></dd>
+		</dl>
+		<dl class=" listIndex" attr="terminal_os_s">
+		  <dt>分  类：</dt>
+		  <dd><a href="javascript:void(0)" values2="" values1="" attrval="面部护肤">面部护肤</a> 
+		  <a href="javascript:void(0)" values2="" values1="" attrval="彩妆">彩妆</a> 
+		  <a href="javascript:void(0)" values2="" values1="" attrval="彩妆">彩妆</a>
+		  <a href="javascript:void(0)" values2="" values1="" attrval="彩妆">彩妆</a></dd>
+		</dl>
+		
+	</div>
+	<div class="hasBeenSelected">
+		<dl>
+		  <dt>您已选择：</dt>
+		  <dd style="DISPLAY: none" class="clearDd">
+		  <div class="clearList"><div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div><div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div><div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div></div>
+		  <div style="DISPLAY: none" class="eliminateCriteria">清除筛选条件</div>
+		</dd></dl>
+	</div>
+</div>
+<script>
+    var dlNum  =$("#selectList").find("dl");
+    for (i = 0; i < dlNum.length; i++) {
+        $(".hasBeenSelected .clearList").append("<div class=\"selectedInfor selectedShow\" style=\"display:none\"><span></span><label></label><em></em></div>");
+    }
+    
+    var refresh = "true";
+    
+    $(".listIndex a ").live("click",function(){
+        var text =$(this).text();
+        var selectedShow = $(".selectedShow");
+        var textTypeIndex =$(this).parents("dl").index();
+        var textType =$(this).parent("dd").siblings("dt").text();
+        index = textTypeIndex -(2);
+        $(".clearDd").show();
+        $(".selectedShow").eq(index).show();
+        $(this).addClass("selected").siblings().removeClass("selected");
+        selectedShow.eq(index).find("span").text(textType);
+        selectedShow.eq(index).find("label").text(text);
+        var show = $(".selectedShow").length - $(".selectedShow:hidden").length;
+        if (show > 1) {
+            $(".eliminateCriteria").show();
+        }
+       
+    });
+    $(".selectedShow em").live("click",function(){
+        $(this).parents(".selectedShow").hide();
+        var textTypeIndex =$(this).parents(".selectedShow").index();
+        index = textTypeIndex;
+        $(".listIndex").eq(index).find("a").removeClass("selected");
+        
+        if($(".listIndex .selected").length < 2){
+            $(".eliminateCriteria").hide();
+        }
+    });
+    
+    $(".eliminateCriteria").live("click",function(){
+        $(".selectedShow").hide();
+        $(this).hide();
+        $(".listIndex a ").removeClass("selected");
+    }); 
+</script>
+
+
+</body></html>

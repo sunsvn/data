@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script src="js/JIC.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<h1>文件上传压缩</h1>
+	<hr />
+	<input type="file" id="uploadfile" />
+	<br />
+	<img id="bigimg" src="#" width="100" height="100" />
+	<br />
+	<img id="smallimg" src="#" width="70" height="70" />
+	<button id="submitBtn">上传</button>
+
+	<script>
+
+	var bigimg = document.getElementById("bigimg");
+	var smallimg = document.getElementById("smallimg");
+
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            // $('#bigimg').attr('src', e.target.result);
+	            bigimg.src = e.target.result
+	            smallimg.src = jic.compress(bigimg,50,'jpg').src;
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+
+	var uploadfile = document.getElementById('uploadfile');
+	uploadfile.onchange = function(){
+	    readURL(this);
+	};
+	var submitBtn = document.getElementById('submitBtn');
+	submitBtn.onclick = function(){
+		var callback= function(response){
+        	console.log("image uploaded successfully! :)");
+        	console.log(response);        	
+        }
+		jic.upload(smallimg, 'upload.php', 'file', 'new.jpg',callback);
+	};
+
+
+	
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+web IM的实现过程
+web IM 聊天功能已实现，能够完成文本、emoji、图片、文件的收发。下面就以已完成的demo为中心，来说一下具体的实现方法。该demo已封装，能快速集成到项目中去。
+
+1、demo展示：
+chat 目录下有两个子文件，chat_hx、chat_hx2，两个文件代表俩个不同的用户，除im.js中用户配置不同其他代码均相同，可分别点击chat_hx、chat_hx2下的index.html运行该demo，会出现两个聊天界面，在此可以感受一下聊天功能。
+
+2、demo目录结构：
+chat_hx和chat_hx2下有 sdk、static、webrtc、im.js、index.html、main.html、pcChat.html。
+
+sdk：目录下为环信官方提供的聊天聊天接口，strophe-1.2.8.min.js、webim.config.js、websdk-1.4.11.js;三个文件在index.html中均需要引入，webim.config.js文件中则需要我们配置应用的AppKey，是该应用的唯一标识；
+static：有css、img、js 提供聊天界面的样式，图片、emoji表情库、jQuery库、underscore库；
+webrtc：官方提供的的rtc聊天库，集成即时视频功能需要引用的文件；
+index.html：手机web聊天界面入口，聊天窗口标签及相应的聊天模板；
+pcChat.html：pc聊天界面，聊天窗口标签及相应的聊天模板；
+main.html：pc聊天界面入口，通过iframe引入pcChat.html；
+im.js:该文件中处理了所有聊天逻辑，提供用户登录接口，消息收发接口，采用localStorage来做消息的本地缓存，在html文件中只需要调用具体方法即可完成聊天功能。一下为具体的调用方法：
+//初始化进去界面掉用该方法
+getHxUser(login_account,send_to);
+//发送图片调用方法  onClick("sendPrivateImg()")
+sendPrivateImg();
+//发送文件调用方法  onClick("sendPrivateFile()")
+sendPrivateFile();
+//发起视频聊天调用方法    onClick("videoCall()")
+videoCall();
+//发送文本消息调用方法    onClick("videoCall()")
+sendPrivateText();
+
+3、缓存逻辑：
+缓存采用了没有时间限制的数据存储 localStorage 存储方式，以键值对的形式来存储一个聊天组。
+(1)展示聊天信息：
+key:"user1:user2" 以当前用户名和聊天对象的用户名作为key；
+value:具体的聊天信息记录以数组形式存在。
+每次登录后通过key来获取缓存中的聊天记录数组：
+var group = "user1:user2";
+var localContent = JSON.parse(localStorage[group]);
+//遍历聊天数组
+$(localContent).each(function(key , obj){
+    var domstring = showBox(obj);//获取对应的聊天模板
+    $(".chat-container").append($(domstring));//展示聊天信息
+    text2bottom();//聊天记录滚动至底部展示最新的聊天信息
+});
+(2)接收信息的缓存处理：
+接收消息将消息同样以键值对（登录用户名:接收者用户名）的的形式存储接收到的消息，存储前处理存储内容：
+var group = "user1:user2";
+var localContent = new Array();
+if (localStorage[group]) {
+    localContent = JSON.parse(localStorage[group]);
+}
+localContent[localContent.length] = {
+    'time':crtTimeFtt(),//时间
+    'data':data,//文本、emoji（符号）、图片（url）、文件(url)数据
+    'from':from,//谁发的
+    'type':type,//文本类型 text,emoji,file,picture
+    'id':id//消息id
+};
+localStorage[group] = JSON.stringify(localContent);//存储本地；
+(3)发送消息的缓存处理：
+发送的消息同样以键值对的形式进行存储，同(2)，图片文件，则是通过官方提供的方法当发送成功后会有对应的URL返回，即将URL作为数据存入data字段即可。
+
+4、模板：
+为控制方便模板写了六套，及左右聊天展示个三套 分别为文本、图片、文件。
+
+
+
+
+
+
+
+
+

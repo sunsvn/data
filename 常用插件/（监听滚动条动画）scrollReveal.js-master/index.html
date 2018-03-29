@@ -1,0 +1,113 @@
+
+
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+
+
+
+    <!-- Last Updated March 7th -->
+
+    <title>scrollReveal.js</title>
+
+
+
+    <meta charset="UTF-8">
+
+    <meta name="description" content="A simple way to create and maintain how elements fade in, triggered when they enter the viewport. An open-source experiment by Julian Lloyd">
+
+
+
+    <!-- Initialize proper device scaling for media queries. (Yay responsive!) -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+
+
+
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+
+
+    <link rel="stylesheet" href="style.css">
+
+
+
+  </head>
+
+  <body>
+
+  <h1 data-scroll-reveal="enter from the top over 1.5s">scrollR eveal.js</h1>
+
+  <p data-scroll-reveal="enter bottom but wait 1s">Declarative on-scroll reveal animations.</p>
+
+  <p data-scroll-reveal="enter bottom but wait 1.3s">An open-source project by <a class="inline" href="#" title="Julian Lloyd on Twitter">@JulianLloyd</a></p>
+
+
+
+  <div class="column-container clearfix">
+
+
+
+   
+
+
+
+    <!-- col 8 -->
+
+    <div class="column">
+
+      <div class="block block-1x block-grape" data-scroll-reveal="enter top"></div>
+
+      <div class="block block-2x block-orange" data-scroll-reveal="enter left"></div>
+
+      <div class="block block-1x block-grape" data-scroll-reveal="enter top"></div>
+
+      <div class="block block-3x block-slate" data-scroll-reveal="enter top over 3s after 0.5s"></div>
+
+      <div class="block block-1x block-blueberry" data-scroll-reveal="enter top over 0.5s and move 200px"></div>
+
+      <div class="block block-2x block-kiwi" data-scroll-reveal="enter bottom over 1s and move 300px after 0.3s"></div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <p data-scroll-reveal="after 1.3s enter bottom over 1s"><small class="floater">(Have you tried scrolling back up?)</small></p>
+
+
+
+
+
+    <script src="dist/scrollReveal.min.js?ver=0.2.0-rc.1"></script>
+
+
+
+    <script type="text/javascript">
+
+      (function($) {
+
+
+
+        'use strict';
+
+
+
+        window.scrollReveal = new scrollReveal({ reset: true, move: '1000px',origin:'left',distance:'1000px',duration:'100000',scale:'0.1' });
+
+      })();
+
+    </script>
+
+  </body>
+
+</html>

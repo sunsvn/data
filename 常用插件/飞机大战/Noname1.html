@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>please enter your title</title>
+		<meta charset="UTF-8">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			var banner = document.getElementById('banner');
+			var oImg = banner.getElementsByTagName('img');
+
+			var time = null;
+
+			var now = 0;
+			oImg[now].style.display = 'block';
+			
+			time = setInterval( next , 1000 )
+
+			function next(){
+				oImg[now].style.display = 'none';
+				now++;
+				now%=(oImg.length);
+				oImg[now].style.display = 'block';
+			}
+
+		</script>
+	</body>
+</html>

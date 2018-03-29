@@ -1,0 +1,64 @@
+<html ng-app="app1">
+  <head>
+  <meta charset='utf-8' />
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <title>angularJs list</title>
+    <script src="angular.min.js"></script>
+  </head>
+  <body ng-controller='ctrl1' >
+  <input type='button' ng-click='sortByType("age")' id="btnSortByAge" value="Sort By Age" />  <input type='button' ng-click='sortByType("height")' id="btnSortByHeight" value="Sort By height" />
+    <ol>
+        <li ng-repeat="item in data | orderBy:sort:desc">
+            <ul>
+            <li>name:<span ng-bind="item.name"></span></li>
+            <li> age:<span ng-bind="item.age"></span></li>
+            <li> sex:<span ng-bind="item.sex"></span></li>
+            <li> height:<span ng-bind="item.height"></span></li>
+            <li> description:<span ng-bind="item.description"></span></li>
+            </ul>
+        </li>
+    </ol>
+    <script>
+    var dataList=[{
+        name:'mary',
+        age:24,
+        sex:'female',
+        height:'170cm',
+        description:'Hi,everyBody,Nice to meet you'
+    },
+    {
+        name:'Jackey',
+        age:28,
+        sex:'male',
+        height:'187cm',
+        description:'Hi,all,Nice to meet you'
+    },
+    {
+        name:'Leon',
+        age:27,
+        sex:'male',
+        height:'180cm',
+        description:'Hi,everyBody,I\'m from china'
+    },
+    {
+        name:'Andy',
+        age:42,
+        sex:'male',
+        height:'173cm',
+        description:'Hi,everyBody,I\'m from Hong kong'
+    }]
+    var app=angular.module('app1',[]);
+    app.controller('ctrl1',['$scope',function($scope){
+        $scope.name="China";
+        $scope.data=dataList;
+        $scope.sort='age';
+        $scope.desc=true;
+        $scope.sortByType=function(type){
+            $scope.sort=type;
+            $scope.desc=!$scope.desc;
+        }
+    }])
+    </script>
+  </body>
+</html>

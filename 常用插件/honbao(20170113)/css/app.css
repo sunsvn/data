@@ -1,0 +1,983 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a, img, ol, ul, li, form, label, input, button,
+table, caption, tbody, tfoot, thead, tr, th, td,
+footer, header {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent; 
+	font-family:'Microsoft YaHei';
+	font-family:'微软雅黑';
+	list-style: none;
+}
+*{
+	font-family:'Microsoft YaHei';
+	font-family:'微软雅黑' !important;
+	box-sizing: border-box;
+}
+.clear{
+	clear:both;
+}
+html, body {
+    position: relative;
+	width:100%;
+	margin:0 auto;
+}
+
+/**
+	 * 提示
+	 */
+.tip_wrap
+{
+    display:none;
+    width:100%;
+    position:fixed;
+    top:45%;
+    z-index:9999;
+}
+.tip
+{
+    background:#f4f4f4;
+    opacity:0.8;
+    padding:15px 60px;
+    color:#fb5236;
+    border-radius:8px;
+    font-size: 28px;
+}
+
+.arrow-up {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5%;
+    z-index: 998;
+    width: 43px;
+    height: 43px;
+    margin: 0 auto;
+}
+.arrow-up i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-image: url(../images/arrow.png);
+    background-repeat: no-repeat;
+    -webkit-animation: arrowUp 2s ease-out infinite;
+    animation: arrowUp 2s ease-out infinite;
+}
+@-webkit-keyframes arrowUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0,0,0)
+    }
+
+    50% {
+        opacity: 1;
+        -webkit-transform: translate3d(0,-20px,0)
+    }
+
+    100% {
+		opacity: 0;
+		-webkit-transform: translate3d(0,-20px,0)
+        
+    }
+}
+
+@keyframes arrowUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0,0,0)
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate3d(0,-20px,0)
+    }
+
+    100% {
+		opacity: 0;
+        transform: translate3d(0,-20px,0)
+    }
+}
+
+.honbaoTop{
+	width:100%;
+	height:333px;
+	padding-top:70px;
+	overflow: hidden;
+	position: relative;
+}
+.honbaoTopWrap{
+	width:100%;
+	height:169px;
+	background:url(../images/bghon.png) no-repeat center top;
+	background-size:100% auto;
+	overflow: hidden;
+	position:absolute;
+	top:0;
+}
+.honbaoTopBox{
+	width:700px;
+	height:265px;
+	margin: 0 auto;
+	background: #fff;
+}
+.headportrait{
+	width:128px;
+	height: 128px;
+	margin: 0 auto;
+	background-color:pink;
+	background-position:center center;
+	background-size:100% auto;
+	border-radius:50%;
+	border:2px solid #fff;
+	position: relative;
+	margin-top: 12px;
+}
+.peoName{
+	font-size: 30px;
+	text-align: center;
+	color:#666;
+	font-family: "微软雅黑";
+	line-height: 60px;
+}
+.peoData{
+	font-size: 26px;
+	text-align: center;
+	color:#999999;
+	font-family: "微软雅黑";
+	line-height: 55px;
+}
+.peoData span{
+	font-size:26px;
+	font-weight: bold;
+	color: #fd5237;
+}
+.peoData a{
+	color: #4260d0;
+	text-decoration: underline;
+}
+.honbaoBtn{
+	width:700px;
+	height:80px;
+	margin:0 auto;
+	position:relative;
+}
+.holderT,.holderB{
+	width:700px;
+	background:#fff;
+	height:30px;
+	position:absolute;
+}
+.holderT{
+	top:0;
+}
+.holderB{
+	bottom:0;
+}
+.holderAll{
+	width:700px;
+	height:80px;
+	background: url(../images/line.png) no-repeat center center;
+	position:absolute;
+	left:0;
+	top:0;
+}
+.btnhonbao{
+	width:450px;
+	height:80px;
+	background:url(../images/sendBtn.png) no-repeat center center;
+	margin: 0 auto;
+	position: relative;
+	z-index: 999;
+	cursor: pointer;
+}
+.btnhonbao p{
+	font-size: 32px;
+	color: #ff3d1e;
+	text-align: center;
+	line-height: 70px;
+}
+.tablistbox{
+	width:700px;
+	margin: 0 auto;
+	background: #fff;;
+}
+ul.tablistBtn {
+	height:85px;
+	padding-top: 30px;
+}
+ul.tablistBtn li{
+	list-style: none;
+	width:50%;
+	float:left;
+	text-align: center;
+	font-size: 30px;
+	line-height: 48px;
+	color: #666666;
+	font-family: "微软雅黑";
+}
+ul.tablistBtn li.cur{
+	color:#ff3d1e;
+		
+}
+.curUnderline{
+	width:280px;
+	height: 8px;
+	background: #fb5236;
+	border-radius:6px;
+	position:absolute;
+	left:35px;
+	top:90px;
+	transition: all 0.5s;
+}
+.tabConBox{
+	width:100%;
+	margin-bottom: 30px;
+}
+.tabConBoxIn ul li{
+	padding:20px 0;
+	width:90%;
+	margin: 0 auto;
+	border-bottom: 1px solid #dbdbdb;
+}
+.honbaolistTit{
+	font-size: 26px;
+	color: #333333;
+	line-height: 60px;
+	display: inline-block;
+	width:100%;
+}
+.honbaolistTit span{
+	float: right;
+}
+.honbaolistTit span.yesSpan{
+	color: #6ac663;
+}
+.honbaolistP{
+	font-size: 26px;
+	color: #999999;
+	line-height: 50px;
+	display: inline-block;
+	width: 100%;
+}
+.honbaolistP span{
+	float:right;
+	display: inline-block;
+}
+.honbaolistP font{
+	color:#fb5236;
+}
+.honbaolistP i{
+	font-style: normal;
+	color: #666666;
+}
+ul.joinListUl{
+	background: #fff;
+}
+ul.joinListUl li{
+	border-bottom:1px solid #dbdbdb;
+}
+ul.joinListUl li .floatDiv{
+	float: left;
+}
+ul.joinListUl li .floatDiv:nth-child(1){
+	width:130px;
+}
+ul.joinListUl li .floatDiv:nth-child(2){
+	width:500px;
+}
+.touxiang{
+	width:100px;
+	height:100px;
+	background-position: center center;
+	background-repeat:no-repeat;
+	background-color: #000;
+	border-radius:50%;
+	background-size:100% auto;
+	margin-top: 17px;
+}
+p.honbaoTitName{
+	font-size: 26px;
+	color: #333333;
+	line-height: 50px;
+}
+p.honbaoTitName span{
+	float:right;
+}
+p.honbaoTitName span.yesSpan{
+	color: #6ac663;
+}
+.honbaolistTit2{
+	font-size: 28px;
+	color: #666;
+	line-height: 45px;
+}
+.honbaolistTit2 span{
+	float: right;
+}
+
+/*------ 红包详情 ------*/
+.honbaodescTop{
+	padding-top: 30px;
+	width:700px;
+	margin: 0 auto 0;
+	background:#fff;
+}
+.descTopLeft{
+	float:left;
+	width:130px;
+}
+.descTopLeft img{
+	margin-left: 35px;
+}
+.descTopRight{
+	float:left;
+	width:547px;
+}
+.descTopTit{
+	font-size: 30px;
+	color: #333333;
+	line-height: 40px;
+	margin-bottom: 35px;
+}
+.descTopPBox{
+	position: relative;
+}
+.descTopPBox .descTopP{
+	font-size: 26px;
+	color: #999999;
+	line-height: 45px;
+}
+.descTopPBox .descTopP span{
+	color: #666666;
+}
+.descTopPBox .descTopP font{
+	color: #fb5236;
+}
+.descShareBtn{
+	width:140px;
+	font-size: 26px;
+	color: #666666;
+	border:2px solid #ffda2f;
+	border-radius:20px;
+	padding:5px;
+	background:url(../images/shareIcon.jpg) no-repeat 20px center;
+	text-indent: 60px;
+	position: absolute;
+	right:10px;
+	top:10px;
+}
+.descStatus{
+	font-size: 26px;
+	position: absolute;
+	bottom:10px;
+	right:10px;
+}
+.yesSpan{
+	color: #6ac663;
+}
+.descConBox{
+	padding:15px 0;
+	width:700px;
+	background: #fff;
+	margin: 0 auto 85px;
+
+}
+.descConBoxUl{
+
+}
+ul.descConBoxUl{
+	width:90%;
+	margin: 0 auto;
+}
+ul.descConBoxUl li{
+	border-bottom:1px solid #dbdbdb;
+	padding:20px 0;
+}
+ul.descConBoxUl li .floatDiv{
+	float: left;
+}
+ul.descConBoxUl li .floatDiv:nth-child(1){
+	width:130px;
+}
+ul.descConBoxUl li .floatDiv:nth-child(2){
+	width:490px;
+}
+.descP1{
+	font-size: 30px;
+	color: #333333;
+}
+.descP1 span{
+	float: right;
+}
+.descP2{
+	font-size: 28px;
+	color:#999999;
+	margin-top: 35px;
+}
+.descBtnBox{
+	width: 100%;
+	position:fixed;
+	bottom:0;
+}
+.descBtn{
+	width:699px;
+	height: 80px;
+	margin: 0 auto;
+	background: url(../images/descBtn.png) no-repeat center center;
+	margin-bottom: 25px;
+	cursor: pointer;
+}
+.loadMore{
+	text-align: center;
+	color: #c7c7c7;
+	font-size: 25px;
+	line-height: 70px;
+}
+/*--- 答案详情 ---*/
+.quesDescTop{
+	padding: 30px 25px 0;
+	width:700px;
+	margin: 0 auto 0;
+	background:#fff;
+}
+.bigFont{
+	font-size: 35px;
+	color: #fb5236;
+	text-align: right;
+}
+.quesDescTopLeft{
+	float:left;
+	width:51px;
+}
+.quesDescTopRight{
+	float:right;
+	width:560px;
+}
+.quesDescTopTit{
+	font-size: 30px;
+	color: #333333;
+	line-height: 40px;
+	margin-bottom: 35px;
+	margin-top: 8px;
+}
+.quesDescTopTit span{
+	color: #999999;
+}
+.redSapn{
+	color: #fb593e;
+}
+.greenSapn{
+	color: green;
+}
+.grapSapn{
+	color: #999999;
+}
+.orangeSpan{
+	color: #ffa320;
+}
+
+/*---- 发红包 ----*/
+.questionbox{
+	width:670px;
+	margin:0 auto;
+	padding: 30px 0;
+}
+.quesTies{
+	font-size: 28px;
+	color: #999999;
+	line-height: 65px;
+	margin-left: 20px;
+	display: inline-block;
+	width:97%;
+}
+.questionStyle{
+	font-size: 32px;
+	color: #111111;
+	position: relative;
+	height:100px;
+	background: #fff;
+	line-height: 100px;
+	border-radius: 12px;
+}
+.questionStyle span{
+	position: absolute;
+}
+.questionStyle span.quesSpan1{
+	left:20px;
+}
+.questionStyle span.quesSpan2{
+	right:25px;
+}
+.quesInput{
+	width: 424px;
+    height: 70px;
+    font-size: 36px;
+    line-height: 70px;
+    position: absolute;
+    left: 180px;
+    top: 15px;
+    text-align: right;
+    border: none;
+    outline: none;
+}
+.quesConBoxIn{
+	padding: 15px 20px 0;
+	margin: 0 auto 0;
+	background:#fff;
+}
+.quesConBoxInLeft{
+	float:left;
+	width:51px;
+}
+.quesConBoxInRight{
+	float:right;
+	width:561px;
+	position: relative;
+}
+.quesConBoxInTit{
+	font-size: 32px;
+	color: #333333;
+	line-height: 40px;
+	margin-bottom: 30px;
+	margin-top: 3px;
+	width: 435px;
+	height: 60px;
+	line-height: 60px;
+	border: none;
+	outline: none;
+}
+.quesConBoxInTit span{
+	color: #999999;
+}
+.quesConBoxInRight  font.getquesFont{
+	color: #fee2b1;
+	background-color: #d74d42;
+	border-radius: 10px;
+	padding:8px 30px;
+	position: absolute;
+	font-size: 28px;
+	position: absolute;
+	right:0px;
+	top:5px;
+}
+.questionUl li{
+	margin-bottom: 30px;
+}
+.quesConBoxInTxtA{
+	font-size: 32px;
+    color: #333333;
+    line-height: 40px;
+    margin-bottom: 15px;
+    margin-top: 3px;
+    width: 554px;
+    height: 86px;
+    border:none;
+    outline: none;
+}
+.addMoreQuesBtn{
+	text-indent: center;
+	font-size: 28px;
+	color: #333333;
+	text-align: center;
+	line-height: 60px;
+	position: relative;
+	background: #fff;
+	border: 10px;
+	padding: 15px 0;
+	margin-top: 60px;
+}
+.addMoreQuesBtn font{
+	font-size: 55px;
+	display:inline-block;
+	color: #fb5236;
+	position: absolute;
+	left:200px;
+	top:10px;
+}
+
+/*---- 回答红包问题 ----*/
+.ansBox{
+	width: 100%;
+	min-height:100%;
+	position: relative;
+	background: rgba(0,0,0,0.6);
+	padding-top:40px;
+	position: fixed;
+}
+.ansBoxIn{
+	width:700px;
+	margin: 0 auto;
+	background: #ed412d url(../images/honbaotop.png) no-repeat center top;
+	min-height: 700px;
+	padding-top: 70px;
+	padding-bottom: 50px;
+	min-height: 1015px;
+	border: none;
+}
+.ansUserName{
+	font-size: 28px;
+	color: #fee1b0;
+	text-align: center;
+	margin-top: 30px;
+}
+.ansQuesHolder1{
+	font-size: 36px;
+	text-align: center;
+	color: #ffffff;
+	margin-top: 60px;
+	margin-bottom: 60px;
+}
+.ansQuesAn{
+	width: 100%;
+	height:167px ;
+	background: url(../images/ansQuesAn.png) no-repeat center center;
+	margin: 120px auto 60px;
+}
+.ansQuesBtn{
+	width:450px;
+	height: 80px;
+	background: url(../images/bgBtn.png) no-repeat center center;
+	margin: 0 auto;
+}
+.ansQuesBtn p{
+	font-size: 34px;
+	color: #ff3d1e;
+	text-align: center;
+	line-height: 80px;
+}
+.ansQuesChkOther{
+	color: #ffc06e;
+	text-align: center;
+	font-size: 28px;
+	margin:30px auto;
+}
+.ansQuesChkOther p span{
+	text-decoration: underline;
+	display: inline-block;
+}
+p.timerP{
+	font-size: 62px;
+	text-align: center;
+	color: #333;
+}
+p.timerP span{
+	font-size: 120px;
+}
+.ansQueshowBox{
+	width: 100%;
+	min-height: 725px;
+	background: #fff url(../images/line2.jpg) repeat-x center top;
+	padding-top: 60px;
+	margin-top: 20px;
+}
+.ansQueP{
+	width:630px;
+	margin: 0 auto;
+}
+.ansQueP p.ans{
+	font-size: 30px;
+	color: #666666;
+	margin-top: 40px;
+}
+.ansQueP p.ans span{
+	font-size: 34px;
+	color: #fb5236;
+	padding-right:10px;
+}
+.ansQueP .ansQuePInp{
+	width:630px;
+	border:2px solid #e3e3e3;
+	text-align: center;
+	height:77px;
+	border-radius: 10px;
+	font-size: 32px;
+	margin-top: 20px;
+}
+.qiangBtn{
+	width: 160px;
+	height: 160px;
+	background:url(../images/qiang.jpg) no-repeat center center;
+	margin:76px auto 0;
+}
+/*--红包结果--*/
+.resBox{
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	position: fixed;
+	left:0;
+	top: 0;
+}
+.resBoxIn{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999;
+    display: -webkit-box; 
+	display: -moz-box; 
+	display: -ms-flexbox; 
+	display: -webkit-flex; 
+	display: flex;  
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	-webkit-box-orient: vertical;
+	-webkit-justify-content: center; 
+	-moz-justify-content: center; 
+	-ms-justify-content: center; 
+	-o-justify-content: center; 
+	justify-content: center;
+	background: rgba(0,0,0,0.5);
+
+}
+.resBoxInDesc{
+	width: 630px;
+	min-height: 800px;
+	background: #fff;
+	border-radius: 15px;
+	position: relative;
+}
+.resSucImg{
+	width: 311px;
+	height: 285px;
+	background:url(../images/honbaoImg.png) no-repeat center center;
+	margin: 90px auto 50px;
+}
+.resBoxInDesc h4{
+	font-size: 36px;
+	color: #fff;
+	line-height: 50px;
+	text-align: center;
+}
+.resBoxInDesc p{
+	font-size: 36px;
+	color: #ffea37;
+	text-align: center;
+}
+.resBoxInDesc p span{
+	color: #ffea37;
+	font-size: 32px;
+}
+.yesGetHonbaoBtn{
+	width: 450px;
+	height: 80px;
+	background: url(../images/bgBtn.png) no-repeat center center;
+	margin:0 auto;
+	text-align: center;
+	color: #ff3d1e;
+	font-size: 34px;
+	line-height: 80px;
+	margin-top: 28px;
+}
+p.ansSuccTies{
+	color:#ffc06e;
+	font-size: 28px;
+	text-align: center;
+	margin-top: 30px;
+}
+.overTimeImg{
+	width: 510px;
+	height: 290px;
+	background: url(../images/overTimeImg.png) no-repeat center center;
+	margin: 20px auto;
+}
+/*--- 红包结果 ---*/
+.ljhonbaoP{
+	width: 294px;
+	height: 25px;
+	background: url(../images/ljhonbaoP.png) no-repeat center center;
+	margin: 20px auto;
+}
+.ljhonbaoP2{
+	font-size: 36px;
+	color: #f65235;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.ljhonbaoP3{
+	width: 294px;
+	height: 25px;
+	background: url(../images/lottery.png) no-repeat center center;
+	margin: 20px auto;
+}
+p.ljhonbaoData{
+	font-size: 32px;
+	color: #333333;
+	text-align: center;
+}
+p.ljhonbaoData span{
+	font-size: 85px;
+}
+.lqTies{
+	font-size: 26px;
+	color: #999999;
+	text-align: center;
+	padding-bottom: 30px;
+}
+.honbaoStatus{
+	font-size: 28px;
+	color: #999999;
+	width: 95%;
+	margin: 0 auto;
+	padding-top: 30px;
+	line-height: 80px;
+	border-bottom: 1px solid #dbdbdb;
+}
+.honbaoStatus a{
+	float: right;
+	color: #ff3d1e;
+	text-decoration: underline;
+}
+.honbaoStatus font{
+	color: #fb5236;
+}
+.reslistP1{
+	font-size: 30px;
+	color: #111;
+}
+.reslistP1 span{
+	float: right;
+}
+.reslistP2{
+	font-size: 28px;
+	color: #999999;
+	margin-top: 25px;
+}
+.reslistP2 span{
+	float: right;
+}
+.loadMore2{
+	background:#fff;
+	height:100px; 
+	line-height:100px;
+	text-align: center;
+	color: #c7c7c7;
+	font-size: 25px;
+	width:700px;
+	margin: 0 auto;
+}
+.getmoreTies{
+	width: 510px;
+    height: 252px;
+    background: url(../images/moreTies.jpg) no-repeat center center;
+    margin: 20px auto;
+    padding-top:125px;
+    line-height: 50px;
+}
+.getmoreTies p{
+	color: #333333;
+	font-size: 30px;
+	text-align: center;
+}
+.closeBtn{
+	position: absolute;
+	right:35px;
+	top:35px;
+	width: 34px;
+	height: 34px;
+	background: url(../images/closeBtn.png) no-repeat center center;
+}
+p.lotteryP{
+	color: #fee1b0;
+	font-size: 32px;
+	text-align: center;
+}
+p.lotteryP span{
+	color: #fee1b0;
+	font-size: 82px;
+}
+p.lotteryP2{
+	color: #ffc06e;
+	font-size: 28px;
+	text-align: center;
+	margin:23px auto 50px;
+}
+
+/*---- div居中 ----*/
+.centerBox{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    display: -webkit-box; 
+	display: -moz-box; 
+	display: -ms-flexbox; 
+	display: -webkit-flex; 
+	display: flex;  
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	-webkit-box-orient: vertical;
+	-webkit-justify-content: center; 
+	-moz-justify-content: center; 
+	-ms-justify-content: center; 
+	-o-justify-content: center; 
+	justify-content: center;
+	background: rgba(0,0,0,0.5);
+}
+.dikouRadius{
+	font-size: 30px;
+	color: #666666;
+	text-indent:55px;
+	position: relative;
+	height: 38px;
+	line-height: 38px;
+	margin: 40px auto;
+}
+.dikouRadius span{
+	width:38px;
+	height:38px;
+	background-image:url(../images/radiusBtn.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	position: absolute;
+	left:0;
+	top:0px;
+}
+.moneyPay{
+	font-size: 34px;
+	color: #333333;
+	text-align: center;
+}
+.moneyPay span{
+	color: #ff3d1e;
+	font-size: 50px;
+}
+.moneyPay span font{
+	font-size: 85px;
+}
+.payBtn{
+	width:680px;
+	height: 80px;
+	background: url(../images/payBg.png) no-repeat center center;
+	background-size: 100% 100%;
+	color: #ff3d1e;
+	font-size: 34px;
+	text-align: center;
+	line-height: 70px;
+	margin-top: 60px;
+}
+.gzhTies{
+	font-size: 28px;
+	color: #4260d0;
+	text-align: center;
+	margin-top: 40px;
+	text-decoration: underline;
+}
+.sharePage{
+	width:630px;
+	height:800px;
+	background:#fff url(../images/sharePage.jpg) no-repeat center bottom;
+	border-radius: 15px;
+}
+.fixedBox{
+	background:rgba(0,0,0,0.5); position:fixed; left:0; top:0; width:100%; height:100%;
+}

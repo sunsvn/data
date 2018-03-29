@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Autocomplete</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <input id="keyword" type="text" list="lists" />
+
+  <datalist id="lists">
+    <option value="able" />
+  </datalist>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    var allData = [];
+    $(document).ready(function(){
+        $.get('http://localhost/autocomplete/data.json', function(data){
+            console.log(data);
+            allData = data.people;
+        });
+    });
+    
+    var keyword = $("#keyword");
+    
+    Autocomplete(keyword);
+    
+    function Autocomplete(keyword){
+        keyword.keyup(function(){
+        
+            console.log(keyword.val());
+            
+            var result = findItems(keyword.val(), allData);
+            
+            if(result.length){
+                console.log(result)
+                for(i=0;i<result.length;i++){
+                    var itemHtml = "<option value='" + result[i].name + "' />";
+                    $("#lists").append(itemHtml);
+                }
+            }
+            
+        });
+    }
+    
+    function findItems(keyword, array){
+        var result = [];
+        if(keyword && array.length){
+            for(i=0;i<array.length;i++){
+                if(array[i].name.indexOf(keyword) != -1){
+                    result.push(array[i]);
+                }
+            }
+        }
+        return result;
+    }
+
+</script>
+</body>
+</html>

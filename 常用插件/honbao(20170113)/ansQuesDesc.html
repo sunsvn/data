@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html style='background-color:#f5f5f5;'>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=750, user-scalable=no, target-densitydpi=device-dpi' />
+<title>红包详情</title>
+<link rel='stylesheet' href='css/app.css' />
+<script src='js/jquery-1.10.1.min.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="./wxshare.js"></script>
+</head>
+
+<body style='max-width:750px; background-color:#f5f5f5;'>
+
+<div class='ansBox' style='background:#f5f5f5;'>
+	<div class='centerBox'>
+		<div class='ansBoxIn' style='background: #f3452f url(images/honbaotop.png) no-repeat center top; padding-bottom:0; position:relative;'>
+			<div class='headportrait' style='background-image:url()'></div>
+			<p class='ansUserName'><span>急便琪琪</span></p>
+			<div class='ansQueshowBox'>
+				<p class='timerP'><span id='timerSpan'>10</span>s</p>
+				<div class='ansQueP'>
+					<p class='ans'><span>Q:</span>打游戏时候我的口头禅是什么？</p>
+					<input class='ansQuePInp' type='text' placeholder='答:'  id='ansQuePInp'/>
+					<div class='qiangBtn' id='qiangBtn'></div>
+				</div>
+			</div>
+			<a href='http://www.baidu.com' class='closeBtn' style='background:none;width:45px; height:45px; right:24px; top:28px;'></a>
+		</div>
+	</div>
+</div>
+<!-- 弹层 -->
+<div class='resBox'  id='resBox'>
+	<div class='resBoxIn'>
+		<!-- 成功获取红包 -->
+		<div class='resBoxInDesc' id='ansRight' style='display:none;background:#ed412d url(images/bghon.png) no-repeat center top; width:630px; background-size:100% auto;'>
+			<div class='resSucImg'></div>
+			<h4>答对惹！那你好棒棒噢！</h4>
+			<p>获得<span>1.00元红包</span></p>
+			<div class='yesGetHonbaoBtn'>确定</div>
+			<p class='ansSuccTies'>金额将存到零钱，可直接提现</p>
+		</div>
+		<!-- 到时间结束 -->
+		<div class='resBoxInDesc' id='timeoutNone' style='background:#ed412d url(images/bghon.png) no-repeat center top; width:630px; background-size:100% auto;'>
+			<div class='headportrait' style='background-image:url(); margin-top:85px;'></div>
+			<p class='ansUserName'><span>急便琪琪</span></p>
+			<div class='overTimeImg'></div>
+			<div class='yesGetHonbaoBtn' id='sureBtn'>确定</div>
+		</div>
+	</div>
+</div>
+<style>
+/* 背景音乐 */
+.audio-open, .audio-close { background-image: url("images/music.png"); }
+</style>
+
+<script>
+
+
+
+//微信分享
+(function($){
+	//微信分享的内容
+	var shareData = {
+		title: '2047,我的生活密码', 
+	    desc: '一千个人有一千种幸福方式，但他们的幸福生活却源自同一组密码', 
+	    link: 'http://carmobile.tigowx.com/',
+	    imgUrl: 'http://carmobile.tigowx.com/wxshare.jpg',
+	};
+	//获得微信分享的处理链接
+	var wxShareHandleUrl = 'http://carmobile.tigowx.com/wxshare.php';
+	var currentUrl = encodeURIComponent(window.location.href);
+	wxshare(wxShareHandleUrl, currentUrl, shareData);
+
+	var flagAnsAble = true;  //答题是否结束
+	//倒计时
+	var timeLeast = 10;
+	var timerMuti = setInterval(function(){
+		timeLeast--;
+		if(timeLeast >= 0 ){
+			$('#timerSpan').text( timeLeast );
+		}else{
+			clearInterval( timerMuti );
+			$('#timeoutNone').show();
+			$('#resBox').fadeIn();
+			flagAnsAble = false;
+		}
+	},1000)
+
+	//关闭弹窗
+
+	$('.yesGetHonbaoBtn').click(function(){
+		$('#resBox').fadeOut();
+		$('.resBoxInDesc').fadeOut();
+	})
+
+	//打开红包
+	$('#qiangBtn').click(function(){
+		//红包抢答结束
+		if(!flagAnsAble){
+			return false;
+		}
+		//未填写答案
+		var ans = $('#ansQuePInp').val().trim();
+		if( ans == '' ){
+			return false;
+		}
+		//回答正确
+		if( ans == "1" ){         //回答正确
+			clearInterval( timerMuti );
+			$('#ansRight').show();
+			$('#resBox').fadeIn();
+		}else{    
+			//回答错误
+			message('回答错误，请重试');
+		}
+	})
+})(jQuery)
+
+
+</script>
+<script src='js/global.js'></script>
+<script src='js/app.js?v201607291209'></script>
+
+</body>
+</html>
+
+
